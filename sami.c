@@ -9,6 +9,8 @@
 #include <sys/wait.h>
 
 
+int SAMI__fd;
+
 int SAMI_make(SAMI *actor, SAMI_Handler *handler, void *arg)
 {
 	int pair[2];
