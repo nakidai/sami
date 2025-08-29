@@ -1,0 +1,35 @@
+SAI(3)			   Library Functions Manual			SAI(3)
+
+NAME
+     sami - simple actor model implementation
+
+SYNOPSIS
+     #include <sami.h>
+
+     int
+     SAMI_make(SAMI *actor, SAMI_Handler *handler, void *arg);
+
+     int
+     SAMI_send(SAMI *actor, void *buf, size_t length);
+
+     int
+     SAMI_recv(void *buf, size_t length);
+
+     int
+     SAMI_kill(SAMI *actor);
+
+DESCRIPTION
+     sami is a library for handling actors.  It uses fork(2) for making
+     actors, and unix(7) sockets for message delivering.
+
+RETURN VALUE
+     All functions return 0 on success, and any other number on failure.
+     Consider checking errno(7) in the latter case.
+
+SEE ALSO
+     fork(2), unix(7)
+
+AUTHORS
+     Nakidai Perumenei <nakidai@disroot.org>
+
+Linux 6.14.7-arch2-1		August 29, 2025		  Linux 6.14.7-arch2-1

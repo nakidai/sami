@@ -1,0 +1,47 @@
+.Dd August 29, 2025
+.Dt SAI 3
+.Os
+.
+.Sh NAME
+.Nm sami
+.Nd simple actor model implementation
+.
+.Sh SYNOPSIS
+.
+.In sami.h
+.Ft "int"
+.Fn SAMI_make "SAMI *actor" "SAMI_Handler *handler" "void *arg"
+.
+.Ft "int"
+.Fn SAMI_send "SAMI *actor" "void *buf" "size_t length"
+.
+.Ft "int"
+.Fn SAMI_recv "void *buf" "size_t length"
+.
+.Ft "int"
+.Fn SAMI_kill "SAMI *actor"
+.
+.Sh DESCRIPTION
+.Nm
+is a library
+for handling actors.
+It uses
+.Xr fork 2
+for making actors,
+and
+.Xr unix 7
+sockets for message delivering.
+.
+.Sh RETURN VALUE
+All functions return 0 on success,
+and any other number on failure.
+Consider checking
+.Xr errno 7
+in the latter case.
+.
+.Sh SEE ALSO
+.Xr fork 2 ,
+.Xr unix 7
+.
+.Sh AUTHORS
+.An Nakidai Perumenei Aq Mt nakidai@disroot.org

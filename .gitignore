@@ -1,0 +1,7 @@
+*~
+#*#
+.wakatime-project
+*.o
+*.a
+build
+main
