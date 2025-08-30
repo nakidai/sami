@@ -108,6 +108,7 @@ int SAMI_kill(SAMI *actor)
 	if (actor->pid == -1
 	 || kill(actor->pid, SIGKILL))
 		return 1;
+	return 0;
 }
 
 SAMI *SAMI_parent(void)
