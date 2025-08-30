@@ -2,6 +2,7 @@
 
 #include <errno.h>
 #include <signal.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -19,6 +20,9 @@ static struct pollfd pfd[ACTORS_MAX];
 static SAMI actors[ACTORS_MAX];
 char buffer[MESSAGE_LENGTH_MAX];
 static int self_fd;
+
+#define log(level, message) \
+	fprintf("%s:%d [%s]: %s\n", __FILE__, __LINE__, level, message)
 
 static ssize_t findspace(void)
 {
@@ -59,10 +63,10 @@ retry:
 		waitpid(-1, 0, WNOHANG);
 		res = poll(pfd, ACTORS_MAX, 0);
 		if (res == -1)
-			if (errno = EINTR)
+			if (errno == EINTR)
 				goto retry;
-			else /* TODO: log fail */
-				exit(1);
+			else
+				log("CRITICAL", strerror(errno)), exit(1);
 		else if (res == 0)
 			goto retry;
 
@@ -72,7 +76,11 @@ retry:
 				break;
 
 			sz = recv(pfd[i].fd, buffer, sizeof(buffer), 0);
-			/* TODO: log if sz == -1 */
+			if (sz == -1)
+			{
+				log("WARNING", strerror(errno));
+				continue;
+			}
 			if (handler(&actor[i], buffer, sz))
 				goto end;
 		}
