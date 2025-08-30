@@ -82,11 +82,9 @@ retry:
 				continue;
 			}
 			if (handler(&actor[i], buffer, sz))
-				goto end;
+				exit(0);
 		}
 		goto retry;
-end:
-		exit(0);
 	}
 
 	close(pair[1]);
