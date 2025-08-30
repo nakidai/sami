@@ -4,7 +4,6 @@
 #include <stddef.h>
 #include <unistd.h>
 
-extern int SAMI__fd;
 
 struct SAMI
 {
@@ -13,11 +12,11 @@ struct SAMI
 };
 typedef struct SAMI SAMI;
 
-typedef void SAMI_Handler(void *arg);
+typedef int SAMI_Handler(const SAMI *sender, void *message, size_t length);
 
-int SAMI_make(SAMI *actor, SAMI_Handler *handler, void *arg);
+int SAMI_make(SAMI *actor, SAMI_Handler *handler);
 int SAMI_send(SAMI *actor, void *buf, size_t length);
-int SAMI_recv(void *buf, size_t length);
 int SAMI_kill(SAMI *actor);
+SAMI *SAMI_parent(void);
 
 #endif /* __SAMI_H__ */

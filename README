@@ -7,24 +7,26 @@ SYNOPSIS
      #include <sami.h>
 
      int
-     SAMI_make(SAMI *actor, SAMI_Handler *handler, void *arg);
+     SAMI_make(SAMI *actor, SAMI_Handler *handler);
 
      int
      SAMI_send(SAMI *actor, void *buf, size_t length);
 
      int
-     SAMI_recv(void *buf, size_t length);
-
-     int
      SAMI_kill(SAMI *actor);
+
+     SAMI *
+     SAMI_parent(void);
 
 DESCRIPTION
      sami is a library for handling actors.  It uses fork(2) for making
      actors, and unix(7) sockets for message delivering.
 
 RETURN VALUE
-     All functions return 0 on success, and any other number on failure.
+     Functions usually return 0 on success, and any other number on failure.
      Consider checking errno(7) in the latter case.
+
+     SAMI_parent() returns a valid pointer.
 
 SEE ALSO
      fork(2), unix(7)

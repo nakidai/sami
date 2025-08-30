@@ -10,16 +10,16 @@
 .
 .In sami.h
 .Ft "int"
-.Fn SAMI_make "SAMI *actor" "SAMI_Handler *handler" "void *arg"
+.Fn SAMI_make "SAMI *actor" "SAMI_Handler *handler"
 .
 .Ft "int"
 .Fn SAMI_send "SAMI *actor" "void *buf" "size_t length"
 .
 .Ft "int"
-.Fn SAMI_recv "void *buf" "size_t length"
-.
-.Ft "int"
 .Fn SAMI_kill "SAMI *actor"
+.
+.Ft "SAMI *"
+.Fn SAMI_parent "void"
 .
 .Sh DESCRIPTION
 .Nm
@@ -33,11 +33,15 @@ and
 sockets for message delivering.
 .
 .Sh RETURN VALUE
-All functions return 0 on success,
+Functions usually return 0 on success,
 and any other number on failure.
 Consider checking
 .Xr errno 7
 in the latter case.
+.
+.Pp
+.Fn SAMI_parent
+returns a valid pointer.
 .
 .Sh SEE ALSO
 .Xr fork 2 ,
